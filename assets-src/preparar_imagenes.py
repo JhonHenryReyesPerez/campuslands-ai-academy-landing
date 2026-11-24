@@ -51,3 +51,10 @@ fav = Image.new("RGBA", (96, 96), (5, 5, 7, 255))
 w = 75; h = round(casco.size[1] * w / casco.size[0])
 fav.alpha_composite(casco.resize((w, h), Image.LANCZOS), ((96 - w) // 2, (96 - h) // 2))
 fav.save(f"{OUT}/../brand/favicon.png", optimize=True)
+
+# Imagen al compartir el enlace (og:image): logo principal sobre Black, 1200x630.
+og = Image.new("RGBA", (1200, 630), (5, 5, 7, 255))
+logo = Image.open(f"{LOGOS}/logo-principal.png")
+w = 560; h = round(logo.size[1] * w / logo.size[0])
+og.alpha_composite(logo.resize((w, h), Image.LANCZOS), ((1200 - w) // 2, (630 - h) // 2))
+og.convert("RGB").save(f"{OUT}/../brand/og.png", optimize=True)
