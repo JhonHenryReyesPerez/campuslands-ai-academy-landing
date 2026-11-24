@@ -1,9 +1,9 @@
 """Genera las imágenes del sitio a partir de recursos locales.
 - Max: expresiones aprobadas del visor, recortadas de la lámina grande del manual, pagina-16.png (fondo lila aprobado).
 - Max de cuerpo entero: poses aprobadas de pagina-17.png (fondo Black), recortadas sin alterar la ilustración.
-- Trainer: fotograma real (s=8) de 'reto-02-edicion/Video de ejemplo.mp4', color natural con leve contraste."""
+- Trainer: fotograma real (s=8) de 'reto-02-edicion/Video de ejemplo.mp4', sin alterar el color."""
 import sys
-from PIL import Image, ImageOps
+from PIL import Image
 import numpy as np
 
 MANUAL, SRC, OUT = sys.argv[1], sys.argv[2], sys.argv[3]
@@ -11,7 +11,9 @@ MANUAL, SRC, OUT = sys.argv[1], sys.argv[2], sys.argv[3]
 # Expresiones del visor en la lámina grande (pagina-16.png, fondo lila aprobado).
 page = Image.open(f"{MANUAL}/pagina-16.png").convert("RGB")
 for name, cx in [("cansado", 292), ("motivado", 630), ("analitico", 968), ("idea", 1308)]:
-    page.crop((cx - 150, 1085, cx + 150, 1385)).resize((272, 272), Image.LANCZOS).save(f"{OUT}/max-{name}.webp", quality=88)
+    cara = Image.new("RGB", (370, 370), page.getpixel((cx, 1070)))  # casco completo, con aire para el recorte circular
+    cara.paste(page.crop((cx - 168, 1090, cx + 168, 1390)), (17, 35))
+    cara.resize((272, 272), Image.LANCZOS).save(f"{OUT}/max-{name}.webp", quality=88)
 
 # Poses de cuerpo entero: el fondo Black conectado al borde pasa a transparente;
 # el visor (negro, encerrado por el casco) se conserva. Bordes suaves por distancia al fondo.
@@ -19,7 +21,7 @@ from scipy import ndimage as nd
 BG = np.array([5, 5, 7.0])
 p17 = np.asarray(Image.open(f"{MANUAL}/pagina-17.png").convert("RGB")).astype(float)
 for name, (x0, x1, y0, y1) in {
-    "presentando": (115, 365, 60, 404), "trabajando": (822, 1052, 72, 404), "descansando": (1254, 1488, 34, 404),
+    "presentando": (115, 365, 60, 410), "trabajando": (822, 1052, 72, 404), "descansando": (1254, 1493, 34, 404),
 }.items():
     c = p17[y0:y1, x0:x1]
     d = np.abs(c - BG).max(-1)
@@ -34,7 +36,6 @@ for name, (x0, x1, y0, y1) in {
     Image.fromarray(np.dstack([rgb, a * 255]).astype(np.uint8), "RGBA").save(f"{OUT}/max-{name}.webp", quality=90)
 
 im = Image.open(f"{SRC}/trainer-frame-ejemplo-8s.png").convert("RGB").crop((600, 70, 1360, 1020))  # 4:5
-im = ImageOps.autocontrast(im, cutoff=0.5)
 for w in (360, 720):
     im.resize((w, w * 5 // 4), Image.LANCZOS).save(f"{OUT}/trainer-{w}.webp", quality=80)
 print("ok")

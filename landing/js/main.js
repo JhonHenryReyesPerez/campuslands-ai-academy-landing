@@ -82,8 +82,8 @@ alHacerScroll();
 /* ---------- Hero: órbitas, inclinación y elección de perfil ---------- */
 const orbita = $('[data-orbita]');
 const plano = $('[data-orbita-plano]');
-const astros = $$('[data-astro]').filter((li) => li.dataset.astro !== 'nebula').map((li, i) => ({
-  li, a: parseFloat(li.style.getPropertyValue('--a')), v: [9, 6, 4, 2.5][i], // grados por segundo: lo interior gira más rápido
+const astros = $$('[data-astro]').filter((li) => li.dataset.astro !== 'nebula').map((li) => ({
+  li, a: parseFloat(li.style.getPropertyValue('--a')),
   rx: parseFloat(li.style.getPropertyValue('--rx')), ry: parseFloat(li.style.getPropertyValue('--ry')),
 }));
 // En la mitad trasera de la órbita el astro pasa detrás del núcleo y su etiqueta va arriba.
@@ -96,10 +96,11 @@ function colocar(s) {
 let heroVisible = true, pausa = false, detenido = false, girando = false, t0 = 0, giroTactil = 0;
 astros.forEach(colocar);
 
+const VELOCIDAD = 5; // grados por segundo, igual para todos: así ningún astro alcanza a otro ni tapa su enlace
 function girar(t) {
   if (!heroVisible || pausa || detenido || reducido.matches || document.hidden) { girando = false; return; }
   const dt = Math.min(64, t - (t0 || t)) / 1000; t0 = t;
-  for (const s of astros) { s.a = (s.a + s.v * dt) % 360; colocar(s); }
+  for (const s of astros) { s.a = (s.a + VELOCIDAD * dt) % 360; colocar(s); }
   requestAnimationFrame(girar);
 }
 function arrancar() { if (!girando && heroVisible && !pausa && !detenido && !reducido.matches) { girando = true; t0 = 0; requestAnimationFrame(girar); } }
