@@ -2,6 +2,8 @@
 
 Rediseño de la landing de Campuslands AI Academy con la identidad del manual de marca v1.0. Una sola página en HTML, CSS y JavaScript, sin dependencias ni paso de compilación.
 
+**Sitio publicado:** https://jhonhenryreyesperez.github.io/campuslands-ai-academy-landing/
+
 ## Cómo correrlo
 
 El sitio está en `landing/`. Cualquier servidor estático sirve. Los módulos ES no cargan desde `file://`, así que no basta con abrir el archivo.
@@ -55,7 +57,7 @@ Inscripción y WhatsApp están siempre a mano: botón fijo en la cabecera y dock
 - Navegación completa con teclado, foco visible, pestañas con flechas, preguntas frecuentes con `<details>`.
 - `prefers-reduced-motion` detiene las órbitas, la inclinación y los revelados.
 - Contraste según la tabla del manual. Probado a 375 px.
-- Lighthouse 12 móvil en local (23 nov 2026): Rendimiento 98, Accesibilidad 100, Buenas prácticas 100, SEO 100.
+- Lighthouse 12 móvil sobre el sitio publicado (23 nov 2026, dos mediciones): Rendimiento 100, Accesibilidad 100, Buenas prácticas 100, SEO 100; LCP 1,4–1,5 s; sin errores en consola.
 
 ## Recursos
 
