@@ -1,0 +1,11 @@
+/* Solo se carga con JavaScript desactivado: muestra lo que el JS abriría y oculta lo que no puede funcionar. */
+.cabecera { position: static; }
+.cabecera__fila { flex-wrap: wrap; height: auto; padding-block: 10px; }
+.menu { display: block !important; position: static; order: 1; width: 100%; padding: 0; border: 0; max-height: none; }
+.menu ul { flex-flow: row wrap; }
+.menu-btn, .orbita__pausa, .perfiles, .ficha, .recomendador, .quien { display: none; }
+.cabecera .btn--compacto { margin-left: auto; }
+.hero { padding-top: 40px; }
+.cielo { grid-template-columns: 1fr; }
+.caso[hidden] { display: grid !important; }
+.brecha { --p: 1; }

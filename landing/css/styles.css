@@ -243,9 +243,8 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.3; }
 .brecha__tag img { width: 72px; height: 72px; border-radius: 50%; }
 .brecha figcaption { margin-top: 18px; color: var(--gray); font-size: .875rem; }
 .argumentos { margin-top: 40px; display: grid; gap: 8px; }
-.argumentos li { padding: 24px 0; border-top: 1px solid var(--linea); }
+.argumentos li { padding: 24px 0; border-top: 2px solid var(--linea); transition: border-color .5s var(--ease); }
 .argumentos h3 { margin-bottom: 8px; }
-.argumentos li { border-top-width: 2px; transition: border-color .5s var(--ease); }
 .argumentos li.visto { border-top-color: var(--soft); }
 @media (min-width: 900px) { .argumentos li { padding-block: 9vh; } .argumentos li:last-child { padding-bottom: 24vh; } }
 

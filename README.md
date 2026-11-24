@@ -18,10 +18,11 @@ npx serve .
 
 Abre http://localhost:5173.
 
-Prueba de la lógica del recomendador:
+Pruebas del recomendador y de la pausa de las órbitas:
 
 ```bash
 node landing/tests/recomendador.test.mjs
+node landing/tests/pausa.test.mjs
 ```
 
 Publicación: GitHub Pages despliega `landing/` en cada push a `main` (`.github/workflows/pages.yml`).
@@ -29,15 +30,17 @@ Publicación: GitHub Pages despliega `landing/` en cada push a `main` (`.github/
 ## Estructura
 
 ```
-landing/index.html            contenido completo (funciona sin JS)
+landing/index.html            contenido (con JS desactivado se lee todo salvo las fichas y el recomendador)
 landing/css/styles.css        tokens de marca y estilos, móvil primero
 landing/js/main.js            interacción: viaje con scroll, órbitas, constelación, pestañas, recomendador
 landing/js/recomendador.js    reglas del recomendador (lógica pura)
+landing/js/pausa.js           cuándo giran las órbitas (lógica pura)
+landing/css/sin-js.css        ajustes con JavaScript desactivado
 landing/js/herramientas.js    fichas de las 14 herramientas
 landing/assets/fonts/         Poppins 400–800, subconjunto latino (licencia OFL)
 landing/assets/brand/         logos y favicon
 landing/assets/img/           Max y fotografía del trainer
-landing/tests/                prueba del recomendador
+landing/tests/                pruebas del recomendador y de la pausa
 assets-src/                   scripts y fuentes que generan las imágenes
 ```
 
@@ -57,7 +60,7 @@ Inscripción y WhatsApp están siempre a mano: botón fijo en la cabecera y dock
 - Navegación completa con teclado, foco visible, pestañas con flechas, preguntas frecuentes con `<details>`.
 - `prefers-reduced-motion` detiene las órbitas, la inclinación y los revelados.
 - Contraste según la tabla del manual. Probado a 375 px.
-- Lighthouse 12 móvil sobre el sitio publicado (23 nov 2026, dos mediciones): Rendimiento 100, Accesibilidad 100, Buenas prácticas 100, SEO 100; LCP 1,4–1,5 s; sin errores en consola.
+- Lighthouse 12 móvil sobre el sitio publicado (24 nov 2026, commit 7517614, dos mediciones): Rendimiento 100, Accesibilidad 100, Buenas prácticas 100, SEO 100; LCP 1,3–1,4 s; sin errores en consola.
 
 ## Recursos
 

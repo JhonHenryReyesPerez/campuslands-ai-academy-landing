@@ -17,6 +17,7 @@
   <link rel="preload" href="assets/fonts/poppins-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/styles.css">
+  <noscript><link rel="stylesheet" href="css/sin-js.css"></noscript>
   <script type="module" src="js/main.js"></script>
 </head>
 <body>
@@ -67,9 +68,9 @@
         <fieldset class="quien" data-quien>
           <legend>¿Quién se prepara para despegar?</legend>
           <div class="quien__opciones">
-            <label><input type="radio" name="quien" value="empresa"><span>Una empresa</span></label>
-            <label><input type="radio" name="quien" value="equipo"><span>Un líder de equipo</span></label>
-            <label><input type="radio" name="quien" value="yo"><span>Yo, como independiente</span></label>
+            <label><input type="radio" name="quien" value="empresa" autocomplete="off"><span>Una empresa</span></label>
+            <label><input type="radio" name="quien" value="equipo" autocomplete="off"><span>Un líder de equipo</span></label>
+            <label><input type="radio" name="quien" value="yo" autocomplete="off"><span>Yo, como independiente</span></label>
           </div>
         </fieldset>
 
@@ -97,7 +98,7 @@
             <li class="es-nebula" data-astro="nebula"><a href="#mision-nebula"><span class="et"><b>Nebula</b> <span>a tu ritmo</span></span></a></li>
           </ul>
         </div>
-        <img class="orbita__max" src="assets/img/max-presentando.webp" width="250" height="344" alt="" decoding="async">
+        <img class="orbita__max" src="assets/img/max-presentando.webp" width="250" height="350" alt="" decoding="async">
         <p class="orbita__nota" data-orbita-nota>Cada órbita es una misión. Más horas, más altura.</p>
         <button class="orbita__pausa" type="button" aria-pressed="false" data-pausa>Pausar órbitas</button>
       </div>
@@ -109,7 +110,7 @@
         <div class="urgencia__grafica">
           <figure class="brecha" aria-labelledby="brecha-cap">
             <svg viewBox="0 0 400 260" aria-hidden="true" focusable="false">
-              <path class="brecha__area" d="M20 230 C 140 222, 240 150, 380 40 L 380 214 C 260 218, 140 226, 20 230 Z" data-brecha-area/>
+              <path class="brecha__area" d="M20 230 C 140 222, 240 150, 380 40 L 380 214 C 260 218, 140 226, 20 230 Z"/>
               <path class="brecha__espera" pathLength="1" d="M20 230 C 140 226, 260 218, 380 214"/>
               <path class="brecha__ia" pathLength="1" d="M20 230 C 140 222, 240 150, 380 40" data-brecha-linea/>
               <circle class="brecha__origen" cx="20" cy="230" r="5"/>
@@ -144,9 +145,7 @@
           <p class="lead">Por qué elegir Campuslands AI Academy: cada ejercicio parte de una tarea que tu equipo ya hace, no de ejemplos genéricos.</p>
         </div>
         <figure class="trainer">
-          <picture>
-            <img src="assets/img/trainer-360.webp" srcset="assets/img/trainer-360.webp 360w, assets/img/trainer-720.webp 720w" sizes="(min-width: 900px) 320px, 70vw" width="360" height="450" alt="Andrés Leal, trainer de AI Academy, explicando un tema durante una clase grabada" loading="lazy" decoding="async">
-          </picture>
+          <img src="assets/img/trainer-360.webp" srcset="assets/img/trainer-360.webp 360w, assets/img/trainer-720.webp 720w" sizes="(min-width: 900px) 320px, 70vw" width="360" height="450" alt="Andrés Leal, trainer de AI Academy, explicando un tema durante una clase grabada" loading="lazy" decoding="async">
           <figcaption><strong>Andrés Leal</strong> Trainer de AI Academy. Enseñan quienes construyen: nuestros trainers crean asistentes y automatizaciones con IA todos los días.</figcaption>
         </figure>
         <ul class="beneficios__lista">
@@ -214,7 +213,7 @@
             </div>
           </div>
           <div class="ficha" data-ficha aria-live="polite">
-            <p class="ficha__vacia" data-ficha-vacia><img class="ficha__max" src="assets/img/max-trabajando.webp" width="218" height="332" alt="" loading="lazy" decoding="async">Elige una estrella. Aquí verás para qué sirve y una tarea real en la que tu equipo la usaría.</p>
+            <p class="ficha__vacia" data-ficha-vacia><img class="ficha__max" src="assets/img/max-trabajando.webp" width="230" height="332" alt="" loading="lazy" decoding="async">Elige una estrella. Aquí verás para qué sirve y una tarea real en la que tu equipo la usaría.</p>
             <div class="ficha__contenido" data-ficha-contenido hidden>
               <p class="ficha__grupo" data-ficha-grupo></p>
               <h3 data-ficha-nombre></h3>
@@ -233,7 +232,7 @@
           <p class="pill">Casos de uso</p>
           <h2>El salto concreto que tu equipo puede <span class="destacada">dar.</span></h2>
           <p class="lead">Elige un perfil y compara cómo trabaja hoy y cómo trabaja después de aplicar IA en su contexto.</p>
-          <img class="casos__max" src="assets/img/max-descansando.webp" width="234" height="370" alt="" loading="lazy" decoding="async">
+          <img class="casos__max" src="assets/img/max-descansando.webp" width="239" height="370" alt="" loading="lazy" decoding="async">
         </div>
         <div class="perfiles" role="tablist" aria-label="Perfiles" data-perfiles>
           <button type="button" role="tab" id="tab-empresario" aria-controls="caso-empresario" aria-selected="true">Empresario o emprendedor</button>

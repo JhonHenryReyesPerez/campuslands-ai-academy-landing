@@ -1,4 +1,5 @@
 import { recomendar, MISIONES } from './recomendador.js';
+import { INICIO, siguiente, enPausa } from './pausa.js';
 import { HERRAMIENTAS, GRUPOS } from './herramientas.js';
 
 const $ = (s, el = document) => el.querySelector(s);
@@ -93,35 +94,35 @@ function colocar(s) {
   s.li.style.top = `${50 + Math.sin(rad) * s.ry}%`;
   s.li.classList.toggle('atras', Math.sin(rad) < 0);
 }
-let heroVisible = true, pausa = false, detenido = false, girando = false, t0 = 0, giroTactil = 0;
+let heroVisible = true, estado = INICIO, girando = false, t0 = 0, giroTactil = 0;
 astros.forEach(colocar);
 
 const VELOCIDAD = 5; // grados por segundo, igual para todos: así ningún astro alcanza a otro ni tapa su enlace
 function girar(t) {
-  if (!heroVisible || pausa || detenido || reducido.matches || document.hidden) { girando = false; return; }
+  if (!heroVisible || enPausa(estado) || reducido.matches || document.hidden) { girando = false; return; }
   const dt = Math.min(64, t - (t0 || t)) / 1000; t0 = t;
   for (const s of astros) { s.a = (s.a + VELOCIDAD * dt) % 360; colocar(s); }
   requestAnimationFrame(girar);
 }
-function arrancar() { if (!girando && heroVisible && !pausa && !detenido && !reducido.matches) { girando = true; t0 = 0; requestAnimationFrame(girar); } }
+function arrancar() { if (!girando && heroVisible && !enPausa(estado) && !reducido.matches) { girando = true; t0 = 0; requestAnimationFrame(girar); } }
 new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; arrancar(); }).observe(orbita);
 document.addEventListener('visibilitychange', arrancar);
 reducido.addEventListener('change', arrancar);
 // Pausa temporal solo sobre los enlaces de las misiones (no sobre el botón de pausa).
 const misiones = $('.orbita__misiones');
-misiones.addEventListener('pointerover', (e) => { if (e.pointerType === 'mouse' && e.target.closest('a')) pausa = true; });
-// Se reanuda solo si ni el ratón ni el foco siguen en una misión.
-misiones.addEventListener('pointerout', (e) => { if (!e.relatedTarget?.closest?.('.orbita__misiones a')) { pausa = misiones.contains(document.activeElement); arrancar(); } });
-misiones.addEventListener('focusin', () => { pausa = true; });
-misiones.addEventListener('focusout', (e) => { pausa = !!e.relatedTarget && misiones.contains(e.relatedTarget) || !!misiones.querySelector('a:hover'); arrancar(); });
+function cambiarPausa(ev) { estado = siguiente(estado, ev); arrancar(); }
+const enMision = (el) => !!el?.closest?.('.orbita__misiones a');
+misiones.addEventListener('pointerover', (e) => cambiarPausa({ tipo: 'puntero', puntero: e.pointerType, dentro: enMision(e.target) }));
+misiones.addEventListener('pointerout', (e) => cambiarPausa({ tipo: 'puntero', puntero: e.pointerType, dentro: enMision(e.relatedTarget) }));
+misiones.addEventListener('focusin', () => cambiarPausa({ tipo: 'foco', dentro: true }));
+misiones.addEventListener('focusout', (e) => cambiarPausa({ tipo: 'foco', dentro: enMision(e.relatedTarget) }));
 
 // Pausa persistente de la animación automática.
 const btnPausa = $('[data-pausa]');
 btnPausa.addEventListener('click', () => {
-  detenido = !detenido;
-  btnPausa.setAttribute('aria-pressed', String(detenido));
-  btnPausa.textContent = detenido ? 'Reanudar órbitas' : 'Pausar órbitas';
-  arrancar();
+  cambiarPausa({ tipo: 'boton' });
+  btnPausa.setAttribute('aria-pressed', String(estado.detenido));
+  btnPausa.textContent = estado.detenido ? 'Reanudar órbitas' : 'Pausar órbitas';
 });
 
 // Cursor: el plano orbital se inclina hacia donde miras.
