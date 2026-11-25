@@ -446,6 +446,7 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.3; }
 /* ---------- Dock móvil ---------- */
 .dock { display: none; }
 @media (max-width: 899px) {
+  html { scroll-padding-bottom: calc(88px + env(safe-area-inset-bottom)); }
   body { padding-bottom: 88px; }
   .dock {
     position: fixed; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); z-index: 45;

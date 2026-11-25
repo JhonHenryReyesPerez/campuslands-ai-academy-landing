@@ -55,12 +55,16 @@ La página es un vuelo: bajar es ganar altitud. Un altímetro (riel lateral en e
 
 Inscripción y WhatsApp están siempre a mano: botón fijo en la cabecera y dock inferior en móvil.
 
+Corrección del recorrido de inscripción (24 nov): a petición del usuario, los nueve CTA de inscripción abren la página principal oficial, https://campuslands.aiacademy.com.co/, en lugar de `/inscripcion`, cuyo selector de formación aparece vacío en la captura aportada. Diagnóstico, Certificado y WhatsApp conservan sus destinos. Cambio comprobado localmente y pendiente de publicación.
+
 ## Accesibilidad y rendimiento
 
 - Navegación completa con teclado, foco visible, pestañas con flechas, preguntas frecuentes con `<details>`.
 - `prefers-reduced-motion` detiene las órbitas, la inclinación y los revelados.
 - Contraste según la tabla del manual. Probado a 375 px.
 - Lighthouse 12 móvil sobre el sitio publicado (24 nov 2026, commit 7517614, dos mediciones): Rendimiento 100, Accesibilidad 100, Buenas prácticas 100, SEO 100; LCP 1,3–1,4 s; sin errores en consola.
+
+Verificación local posterior del 24 nov: Edge a 1440, 768 y 375 px; hero, herramientas, pestañas con teclado, recomendador, pausa, movimiento reducido y contenido sin JavaScript correctos. Se añadió espacio de scroll bajo el dock móvil para mantener visible el foco. Lighthouse 12.8.2 móvil local, pasada final: 99/100/100/100; LCP 2,0 s y CLS 0,002. Esta corrección está pendiente de publicación; las cifras anteriores corresponden a la versión publicada que se midió entonces.
 
 ## Recursos
 
